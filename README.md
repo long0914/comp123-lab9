@@ -1,3 +1,5 @@
+# The Song class
+
 You will be practicing to read from a file and building a relatively
 more complex system consisting o the three interconnected types that is
 illustrated below:
@@ -9,7 +11,7 @@ style="width:1.94767in;height:0.76032in" />
 
 All the above type must decorated with the public keyword
 
-# The SongGenre enum
+## The SongGenre enum
 
 This enum comprise of seven types of songs
 
@@ -54,8 +56,6 @@ each value has exactly a single value one, therefore as possible value
 can only come from a unique combination of the base value.
 
 e.g. 0b1_010 is a result of combining Rock and Country
-
-# The Song class
 
 This acts like a record for the song. The setter is missing for all the
 properties
@@ -107,32 +107,32 @@ artist : <strong><mark>string</mark></strong>, length :
 </tbody>
 </table>
 
-#### Description of the class members
+### Description of the class members
 
-##### Fields
+#### Fields
 
 There are no fields.
 
-##### Properties:
+#### Properties
 
 This class comprise of four auto-implemented properties with public
 getters and setters absent. See the UML class diagram above for more
 details.
 
-##### Constructor:
+#### Constructor
 
 **<span class="mark">public</span> Song(string title, string artist,
 double length, SongGenre genre)** – This constructor that takes four
 arguments and assigns them to the appropriate properties.
 
-##### Method:
+#### Method
 
 **<span class="mark">public override string</span> ToString()** – This
 public method overrides the **ToString()** method of the object class.
 It does not take any argument and returns a string representation of the
 object. See the output for hints on the return value of this method.
 
-# The Library class
+## The Library class
 
 This is the front end of the application. This is a static class
 therefore all the members also have to be static. Remember class members
@@ -177,22 +177,22 @@ are accessed using the type instead of object reference.
 </tbody>
 </table>
 
-#### Description of class members
+### Description of class members
 
-##### Fields:
+#### Fields
 
 **songs** – this private field is a list of song object is a class
 variable.
 
-##### Properties:
+#### Properties
 
 There are no properties.
 
-##### Constructor:
+#### Constructor
 
 There is no constructor for this class.
 
-##### Methods
+#### Methods
 
 There are four over-loaded methods. Remember that overloading is a
 technique used to reduce the complexity of the API exposed by the Song
@@ -312,7 +312,7 @@ Library.DisplaySongs(length);
 
 Program output
 
-```
+``` txt
 Baby by Justin Bebier (Pop) 3.35min
 
 The Promise by Chris Cornell (Rock, Country) 4.26min
