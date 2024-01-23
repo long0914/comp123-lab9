@@ -13,7 +13,7 @@
             Console.WriteLine(new Song("The Promise", "Chris Cornell", 4.26, SongGenre.Country | SongGenre.Rock));
 
             // Class methods are invoke with the class name
-            Library.LoadSongs("Week_03_lab_09_songs4.txt"); 
+            Library.LoadSongs("Week_03_lab_09_songs4.txt");
 
             Console.WriteLine("\n\nAll songs");
 
