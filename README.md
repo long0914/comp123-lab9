@@ -134,7 +134,7 @@ object. See the output for hints on the return value of this method.
 
 ## The Library class
 
-This is the front end of the application. This is a static class
+This is the frontend of the application. This is a static class
 therefore all the members also have to be static. Remember class members
 are accessed using the type instead of object reference.
 
