@@ -113,13 +113,13 @@ artist : <strong><mark>string</mark></strong>, length :
 
 There are no fields.
 
-##### Properties
+#### Properties
 
 This class comprise of four auto-implemented properties with public
 getters and setters absent. See the UML class diagram above for more
 details.
 
-##### Constructor
+#### Constructor
 
 **<span class="mark">public</span> Song(string title, string artist,
 double length, SongGenre genre)** – This constructor that takes four
