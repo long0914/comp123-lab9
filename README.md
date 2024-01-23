@@ -1,35 +1,27 @@
-You will learn about enums, static members and default arguments.
+You will be practicing to read from a file and building a relatively
+more complex system consisting o the three interconnected types that is
+illustrated below:
 
-## Enums
+<img src="./media/image1.png"
+style="width:1.94767in;height:0.76032in" /><img src="./media/image2.png"
+style="width:1.94767in;height:0.76032in" /><img src="./media/image3.png"
+style="width:1.94767in;height:0.76032in" />
 
-An enum is a user-define type like a class. However, all the members are
-constants with implied values. It provides an efficient way of defining
-a set of named integral constants such as the days of the week or months
-of the year or even the set of pre-defined colors.
+All the above type must decorated with the public keyword
 
-It supports a more robust programming style e.g. If you have a method
-that expects a month as an argument of type to a string, you will have
-do lots of defensive programming, instead define an enum type that has
-the 12 months. During development, the compiler will do the necessary
-checks for the require type hence you will do less programming.
+# The SongGenre enum
 
-## Static members
+This enum comprise of seven types of songs
 
-The static decorator when used on a member indicates that member belongs
-to the type rather than an object. You will access that member using the
-type rather than an object reference. Static methods or properties may
-only access other static members. The only instance member that can be
-accessed is the constructor.
+To code this add a new item to your project and select the class option.
+Make the necessary changes to the header to reflect the enum type. You
+should decorate this enum with the **Flags** attribute, because values
+may be combined e.g. a song may belong to multiple genres such as
+Country+Blues.
 
-You can recognize an instance member by the absence of the static
-modifier. Instance methods are able to access other instance members as
-well as class members.
-
-# The TimeFormat Enum
-
-Sometimes you don’t even care about the underlining values as in this
-case or, (Maritial status: Single, Married, Widowed etc.), (Sale status:
-Confirmed, Shipped, Paid etc.)
+In order to make the flags work as you would expect, you must set each
+value to an ascending power of 2 e.g. 0, 1, 2, 4, 8, 16 … or simply use
+the binary values as shown in the diagram below.
 
 <table>
 <colgroup>
@@ -37,44 +29,36 @@ Confirmed, Shipped, Paid etc.)
 </colgroup>
 <thead>
 <tr class="header">
-<th><p><strong>TimeFormat</strong></p>
+<th><p><strong>SongGenre</strong></p>
 <p>Enum</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Values</strong></td>
-</tr>
-<tr class="even">
-<td><blockquote>
-<p>Mil</p>
-<p>Hour12</p>
-<p>Hour24</p>
+<td><p><strong>Members</strong></p>
+<blockquote>
+<p>Unclassified = 0</p>
+<p>Pop = 0b1</p>
+<p>Rock = 0b10</p>
+<p>Blues = 0b100</p>
+<p>Country = 0b1_000</p>
+<p>Metal = 0b10_000</p>
+<p>Soul = 0b100_000</p>
 </blockquote></td>
 </tr>
 </tbody>
 </table>
 
-You may define/code this type in the Time.cs file, but it should be
-external to the Time class.
+If you examine the binary values for each enum, you will notice that
+each value has exactly a single value one, therefore as possible value
+can only come from a unique combination of the base value.
 
-# The Time Class
+e.g. 0b1_010 is a result of combining Rock and Country
 
-**<u>UML Class Diagram</u>**
+# The Song class
 
-\$ 🡪 static
-
-\- 🡪 private
-
-\+ 🡪 public
-
-\# 🡪 protected
-
-### Code the Time class below:
-
-This class comprise of six members: a field, two properties and two
-methods and a constructor a SetTimeFormat() and a ToString() method. All
-the fields are private and all the methods are public
+This acts like a record for the song. The setter is missing for all the
+properties
 
 <table>
 <colgroup>
@@ -82,7 +66,7 @@ the fields are private and all the methods are public
 </colgroup>
 <thead>
 <tr class="header">
-<th><p><strong>Time</strong></p>
+<th><p><strong>Song</strong></p>
 <p>Class</p></th>
 </tr>
 </thead>
@@ -98,10 +82,14 @@ the fields are private and all the methods are public
 </tr>
 <tr class="even">
 <td><blockquote>
-<p>-$ TIME_FORMAT = <mark>TimeFormat.Hour12</mark> :
-<strong><mark>TimeFormat</mark></strong></p>
-<p>+ «setter absent» Hour : <strong><mark>int</mark></strong></p>
-<p>+ «setter absent» Minute : <strong><mark>int</mark></strong></p>
+<p>+ «property setter absent» Artist :
+<strong><mark>string</mark></strong></p>
+<p>+ «property setter absent» Title :
+<strong><mark>string</mark></strong></p>
+<p>+ «property setter absent» Length :
+<strong><mark>double</mark></strong></p>
+<p>+ «property setter absent» Genre :
+<strong><mark>SongGenre</mark></strong></p>
 </blockquote></td>
 </tr>
 <tr class="odd">
@@ -109,10 +97,80 @@ the fields are private and all the methods are public
 </tr>
 <tr class="even">
 <td><blockquote>
-<p>+ «constructor» Time(hour = 0 : <strong><mark>int</mark></strong>,
-minute = 0: <strong><mark>int</mark></strong>)</p>
+<p>+ «constructor» Song(title : <strong><mark>string</mark></strong>,
+artist : <strong><mark>string</mark></strong>, length :
+<strong><mark>double</mark></strong>, genre :
+<strong><mark>SongGenre</mark></strong>)</p>
 <p>+ ToString() : <strong><mark>string</mark></strong></p>
-<p>$+ SetFormat(timeFormat : <strong><mark>TimeFormat</mark></strong>) :
+</blockquote></td>
+</tr>
+</tbody>
+</table>
+
+#### Description of the class members
+
+##### Fields
+
+There are no fields.
+
+##### Properties:
+
+This class comprise of four auto-implemented properties with public
+getters and setters absent. See the UML class diagram above for more
+details.
+
+##### Constructor:
+
+**<span class="mark">public</span> Song(string title, string artist,
+double length, SongGenre genre)** – This constructor that takes four
+arguments and assigns them to the appropriate properties.
+
+##### Method:
+
+**<span class="mark">public override string</span> ToString()** – This
+public method overrides the **ToString()** method of the object class.
+It does not take any argument and returns a string representation of the
+object. See the output for hints on the return value of this method.
+
+# The Library class
+
+This is the front end of the application. This is a static class
+therefore all the members also have to be static. Remember class members
+are accessed using the type instead of object reference.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><p><strong>Library</strong></p>
+<p>Static Class</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Fields</strong></td>
+</tr>
+<tr class="even">
+<td><blockquote>
+<p>$- songs :
+<strong><mark>List</mark></strong>&lt;<strong><mark>Song</mark></strong>&gt;</p>
+</blockquote></td>
+</tr>
+<tr class="odd">
+<td><strong>Methods</strong></td>
+</tr>
+<tr class="even">
+<td><blockquote>
+<p>$+ LoadSongs(filename : <strong><mark>string</mark></strong>,) :
+<strong><mark>void</mark></strong></p>
+<p>$+ DisplaySongs() : <strong><mark>void</mark></strong></p>
+<p>$+ DisplaySongs(longerThan : <strong><mark>double</mark></strong>) :
+<strong><mark>void</mark></strong></p>
+<p>$+ DisplaySongs(genre : <strong><mark>SongGenre</mark></strong>) :
+<strong><mark>void</mark></strong></p>
+<p>$+ DisplaySongs(artist : <strong><mark>string</mark></strong>) :
 <strong><mark>void</mark></strong></p>
 </blockquote></td>
 </tr>
@@ -121,189 +179,233 @@ minute = 0: <strong><mark>int</mark></strong>)</p>
 
 #### Description of class members
 
-A class member that is decorated with the
-**<span class="mark">static</span>** keyword implies that only one copy
-of this member exists and it is shared by all objects of the class. i.e.
-If it is changed then all object will see the new value immediately.
-
-A class method can only access other class member
-(fields/properties/methods)
-
 ##### Fields:
 
-There are no fields for this class.
+**songs** – this private field is a list of song object is a class
+variable.
 
 ##### Properties:
 
-**TIME_FORMAT** – this class variable is of type
-<span class="mark">TimeFormat</span> and it represents the intended
-format of the ToString() method. This field has private accessibility
-and it initializes to <span class="mark">TimeFormat.Hour12</span> at
-declaration.
-
-**Hour** – this is an integer representing the hour value this object.
-This property has public read access and the setter is missing.
-
-**Minute** – this is an integer representing the minute value this
-object. This property has public read access and the setter is missing.
+There are no properties.
 
 ##### Constructor:
 
-**<span class="mark">public</span> Time(int hours = 0, int minutes =
-0)** – This is a public constructor that takes two integer arguments
-with default values of **0**. If checks if the first argument is between
-0 and 24 it assigns it to the Hour property otherwise a value of 0 is
-assign to the hour property. Similarly the second argument is check if
-it is between 0 and 60 then it is assigned to the Minute property
-otherwise a value of 0 is assigned to the Minute property.
+There is no constructor for this class.
 
-##### Methods:
+##### Methods
 
-**<span class="mark">public override string</span> ToString()** – This
-public method overrides the ToString of the object class. It does not
-take any argument and returns a string representation of the object. The
-return value will depend on the field TIME_FORMAT value of the class. So
-it is a good plan if you use a switch statement to handle the three
-possibilities. Your switch statement should check the value of the
-TIME_FORMAT field.
+There are four over-loaded methods. Remember that overloading is a
+technique used to reduce the complexity of the API exposed by the Song
+class.
 
-If you have a Time object with the hours value as **18** and the minutes
-value as **5** then the print out of the object will be
+Here a foreach loop is recommended for all of the overloaded
+DisplaySongs methods.
 
-A **switch** statement is probably the simplest way to implement this
-functionality
+**<span class="mark">public static</span> <span class="mark">void</span>
+DisplaySongs()** – This is a public class method that does not take any
+argument and displays all the songs in the collection.
 
-“1805” if TIME_FORMAT is set to <span class="mark">TimeFormat.MIL. Use
-the d2 format specifier to get the leading zero.</span>
+**<span class="mark">public static</span> <span class="mark">void</span>
+DisplaySongs(double longerThan)** – This is a public class method that
+takes a double argument and displays only songs that are longer than the
+argument.
 
-“18:05” if TIME_FORMAT is set to
-<span class="mark">TimeFormat.HOUR2</span>4<span class="mark">. Again,
-use the d2 format specifier to get the leading zero.</span>
+**<span class="mark">public static</span> <span class="mark">void</span>
+DisplaySongs(SongGenre genre)** – This is a public class method that
+takes a SongGenre argument and displays only songs that are of this
+genre.
 
-“6:05 PM” if TIME_FORMAT is set to <span class="mark">TimeFormat.HOUR12.
-Again, use the d2 format specifier to get the leading zero.</span>
+**<span class="mark">public static</span> <span class="mark">void</span>
+DisplaySongs(string artist)** – This is a public class method that takes
+a string argument and displays only songs by this artist.
 
-**<span class="mark">public static void</span>
-SetTimeFormat(**<span class="mark">TimeFormat</span> **time_format)** –
-This a class method that is public. It takes a single
-<span class="mark">TimeFormat</span> argument and assigns it to the
-static TIME_FORMAT field.
+**<span class="mark">public static</span> <span class="mark">void</span>
+LoadSongs(string fileName)** – This a class method that is public. It
+takes a single string argument that represents a text file containing a
+collection of songs. You will read all the data and create songs and add
+it to the songs collection. Examine the contents of the files for a
+better understanding of how this should be done. You will have to read
+four lines to create one Song. Your loop body should have four
+ReadLine(). The recipe below might clarify things:
 
-This method must be static because it needs to access a static field.
+<u>The contents of text file</u>
+
+Baby
+
+Justin Bebier
+
+3.35
+
+Pop
+
+- Initialize the songs field to a new List of Song
+
+- Declare four string variable (title, artist, length, genre) to store
+  the results of four reader.ReadLine().
+
+- The first ReadLine() is a string representing the title of the song.
+  This can and should used as a check for termination condition. If this
+  is empty then there are no more songs to read i.e. it is the end of
+  the file
+
+- The next ReadLine() will get the Artist
+
+This is a complex method and rightfully it should be a part of the
+**Song** Class
+
+- The next ReadLine() will be a string that represents the weight. Use
+  the Convert.ToDouble to get the required type
+
+- The next ReadLine() will be a string that represents the genre. Use
+  the Enum.Parse() to get the required type
+
+- Use the above four variables to create a Song object.
+
+- Add the newly created object to the collection.
+
+- And finally do one more read for the title to re-enter the loop.
+
+P.S. Before running the <span class="mark">Library.LoadSongs()</span>
+you will need to copy the files Week_03_lab09_song.txt,
+Week_03_lab09_song2.txt, Week_03_lab09_song3.txt and
+Week_03_lab09_song4.txt to the bin\debug folder.
 
 ### Test Harness
 
-Insert the following code statements in your Program.cs file:
+Insert the following code statements in the **Main()** method of your
+Program.cs file:
 
-<span class="mark">//create a list to store the objects</span>
+``` cs
+//To test the constructor and the ToString method
 
-<span class="mark">List\<Time\> times = new List\<Time\>()</span>
+Console.WriteLine(new Song("Baby", "Justin Bebier", 3.35, SongGenre.Pop));
 
-<span class="mark">{</span>
+//This is first time that you are using the bitwise or. It is used to specify a combination of genres
 
-<span class="mark">new Time(9, 35),</span>
+Console.WriteLine(new Song("The Promise", "Chris Cornell", 4.26, SongGenre.Country | SongGenre.Rock));
 
-<span class="mark">new Time(18, 5),</span>
+Library.LoadSongs("Week_03_lab_09_songs4.txt"); //Class methods are invoke with the class name
 
-<span class="mark">new Time(20, 500),</span>
+Console.WriteLine("\n\nAll songs");
 
-<span class="mark">new Time(10),</span>
+Library.DisplaySongs();
 
-<span class="mark">new Time()</span>
+SongGenre genre = SongGenre.Rock;
 
-<span class="mark">};</span>
+Console.WriteLine($"\n\n{genre} songs");
 
-<span class="mark">//display all the objects</span>
+Library.DisplaySongs(genre);
 
-<span class="mark">TimeFormat format = TimeFormat.Hour12;</span>
+string artist = "Bob Dylan";
 
-<span class="mark">Console.WriteLine(\$"\n\nTime format is
-{format}");</span>
+Console.WriteLine($"\n\nSongs by {artist}");
 
-<span class="mark">foreach (Time t in times)</span>
+Library.DisplaySongs(artist);
 
-<span class="mark">{</span>
+double length = 5.0;
 
-<span class="mark">Console.WriteLine(t);</span>
+Console.WriteLine($"\n\nSongs more than {length}mins");
 
-<span class="mark">}</span>
+Library.DisplaySongs(length);
 
-<span class="mark">//change the format of the output</span>
+```
 
-<span class="mark">format = TimeFormat.Mil;</span>
+Program output
 
-<span class="mark">Console.WriteLine(\$"\n\nSetting time format to
-{format}");</span>
+```
+Baby by Justin Bebier (Pop) 3.35min
 
-<span class="mark">//SetFormat(TimeFormat) is a class member, so you
-need the type to access it</span>
+The Promise by Chris Cornell (Rock, Country) 4.26min
 
-<span class="mark">Time.SetFormat(format);</span>
+All songs
 
-<span class="mark">//again display all the objects</span>
+Baby by Justin Bebier (Pop) 3.35min
 
-<span class="mark">foreach (Time t in times)</span>
+Fearless by Taylor Swift (Pop) 4.03min
 
-<span class="mark">{</span>
+Runaway Love by Ludacris (Pop) 4.41min
 
-<span class="mark">Console.WriteLine(t);</span>
+My Heart Will Go On by Celine Dion (Pop) 4.41min
 
-<span class="mark">}</span>
+Jesus Take The Wheel by Carrie Underwood (Country) 3.31min
 
-<span class="mark">//change the format of the output</span>
+If Tomorrow Never Comes by Garth Brooks (Country) 3.40min
 
-<span class="mark">format = TimeFormat.Hour24;</span>
+Set Fire To Rain by Adele (Soul) 4.01min
 
-<span class="mark">Console.WriteLine(\$"\n\nSetting time format to
-{format}");</span>
+Don't You Remember by Adele (Soul) 3.03min
 
-<span class="mark">//SetFormat(TimeFormat) is a class member, so you
-need the type to access it</span>
+Signed Sealed Deliverd I'm Yours by Stevie Wonder (Soul) 2.39min
 
-<span class="mark">Time.SetFormat(format);</span>
+Just Another Night by Mick Jagger (Rock) 5.15min
 
-<span class="mark">foreach (Time t in times)</span>
+Brown Sugar by Mick Jagger (Rock) 3.50min
 
-<span class="mark">{</span>
+All I Want Is You by Bono (Metal) 6.30min
 
-<span class="mark">Console.WriteLine(t);</span>
+Beautiful Day by Bono (Metal) 4.08min
 
-<span class="mark">}</span>
+Like A Rolling Stone by Bob Dylan (Rock) 6.08min
 
-Your output will look like below:
+Just Like a Woman by Bob Dylan (Rock) 4.51min
 
-Time format is Hour12
+Hurricane by Bob Dylan (Rock) 8.33min
 
-9:35 AM
+Subterranean Homesick Blues by Bob Dylan (Rock) 2.24min
 
-6:05 PM
+Tangled Up In Blue by Bob Dylan (Rock) 5.40min
 
-8:00 PM
+Love Me by Elvis Presley (Rock) 2.42min
 
-10:00 AM
+In The Getto by Elvis Presley (Rock) 2.31min
 
-0:00 AM
+All Shook Up by Elvis Presley (Rock) 1.54min
 
-Setting time format to Mil
+Rock songs
 
-0935
+Just Another Night by Mick Jagger (Rock) 5.15min
 
-1805
+Brown Sugar by Mick Jagger (Rock) 3.50min
 
-2000
+Like A Rolling Stone by Bob Dylan (Rock) 6.08min
 
-1000
+Just Like a Woman by Bob Dylan (Rock) 4.51min
 
-0000
+Hurricane by Bob Dylan (Rock) 8.33min
 
-Setting time format to Hour24
+Subterranean Homesick Blues by Bob Dylan (Rock) 2.24min
 
-09:35
+Tangled Up In Blue by Bob Dylan (Rock) 5.40min
 
-18:05
+Love Me by Elvis Presley (Rock) 2.42min
 
-20:00
+In The Getto by Elvis Presley (Rock) 2.31min
 
-10:00
+All Shook Up by Elvis Presley (Rock) 1.54min
 
-00:00
+Songs by Bob Dylan
+
+Like A Rolling Stone by Bob Dylan (Rock) 6.08min
+
+Just Like a Woman by Bob Dylan (Rock) 4.51min
+
+Hurricane by Bob Dylan (Rock) 8.33min
+
+Subterranean Homesick Blues by Bob Dylan (Rock) 2.24min
+
+Tangled Up In Blue by Bob Dylan (Rock) 5.40min
+
+Songs more than 5mins
+
+Just Another Night by Mick Jagger (Rock) 5.15min
+
+All I Want Is You by Bono (Metal) 6.30min
+
+Like A Rolling Stone by Bob Dylan (Rock) 6.08min
+
+Hurricane by Bob Dylan (Rock) 8.33min
+
+Tangled Up In Blue by Bob Dylan (Rock) 5.40min
+
+Press any key to continue . . .
+```
