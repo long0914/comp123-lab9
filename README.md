@@ -109,23 +109,23 @@ artist : <strong><mark>string</mark></strong>, length :
 
 ### Description of the class members
 
-#### Fields
+##### Fields
 
 There are no fields.
 
-#### Properties
+##### Properties
 
 This class comprise of four auto-implemented properties with public
 getters and setters absent. See the UML class diagram above for more
 details.
 
-#### Constructor
+##### Constructor
 
 **<span class="mark">public</span> Song(string title, string artist,
 double length, SongGenre genre)** – This constructor that takes four
 arguments and assigns them to the appropriate properties.
 
-#### Method
+##### Method
 
 **<span class="mark">public override string</span> ToString()** – This
 public method overrides the **ToString()** method of the object class.
