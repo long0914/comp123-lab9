@@ -2,11 +2,11 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-vscode-remote.remote-containers",
         "GitHub.copilot",
         "GitHub.copilot-chat",
         "GitHub.codespaces",
         "vsls-contrib.gitdoc",
+        "ms-vscode-remote.remote-containers",
         "ms-dotnettools.csdevkit",
         "kreativ-software.csharpextensions",
         "jorgeserrano.vscode-csharp-snippets",
