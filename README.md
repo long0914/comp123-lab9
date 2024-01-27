@@ -236,7 +236,7 @@ ReadLine(). The recipe below might clarify things:
 
 Baby
 
-Justin Bebier
+Justin Bieber
 
 3.35
 
@@ -282,7 +282,7 @@ Program.cs file:
 ``` cs
 //To test the constructor and the ToString method
 
-Console.WriteLine(new Song("Baby", "Justin Bebier", 3.35, SongGenre.Pop));
+Console.WriteLine(new Song("Baby", "Justin Bieber", 3.35, SongGenre.Pop));
 
 //This is first time that you are using the bitwise or. It is used to specify a combination of genres
 
@@ -317,13 +317,13 @@ Library.DisplaySongs(length);
 Program output
 
 ``` txt
-Baby by Justin Bebier (Pop) 3.35min
+Baby by Justin Bieber (Pop) 3.35min
 
 The Promise by Chris Cornell (Rock, Country) 4.26min
 
 All songs
 
-Baby by Justin Bebier (Pop) 3.35min
+Baby by Justin Bieber (Pop) 3.35min
 
 Fearless by Taylor Swift (Pop) 4.03min
 

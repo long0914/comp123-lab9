@@ -6,7 +6,7 @@
         {
             // To test the constructor and the ToString method
 
-            Console.WriteLine(new Song("Baby", "Justin Bebier", 3.35, SongGenre.Pop));
+            Console.WriteLine(new Song("Baby", "Justin Bieber", 3.35, SongGenre.Pop));
 
             // This is first time that you are using the bitwise or. It is used to specify a combination of genres
 
