@@ -79,12 +79,12 @@
 
         public static void LoadSongs(string fileName)
         {
-            using (StreamReader reader = new StreamReader(fileName))
+            using (StreamReader? reader = new StreamReader(fileName))
             {
-                string title;
+                string? title;
                 while ((title = reader.ReadLine()) != null)
                 {
-                    string artist = reader.ReadLine();
+                    string? artist = reader.ReadLine();
                     double length = Convert.ToDouble(reader.ReadLine());
                     SongGenre genre = (SongGenre)Enum.Parse(typeof(SongGenre), reader.ReadLine());
                     songs.Add(new Song(title, artist, length, genre));
