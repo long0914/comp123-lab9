@@ -1,5 +1,9 @@
 # The Song class
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ttran375/comp123-lab9)
+
+[![Style Check](https://github.com/ttran375/comp123-lab9/actions/workflows/main.yml/badge.svg)](https://github.com/ttran375/comp123-lab9/actions/workflows/main.yml)
+
 You will be practicing to read from a file and building a relatively
 more complex system consisting o the three interconnected types that is
 illustrated below:
@@ -125,7 +129,7 @@ details.
 double length, SongGenre genre)** – This constructor that takes four
 arguments and assigns them to the appropriate properties.
 
-#**Method**
+**Method**
 
 **<span class="mark">public override string</span> ToString()** – This
 public method overrides the **ToString()** method of the object class.
