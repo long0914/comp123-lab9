@@ -86,7 +86,16 @@
                 {
                     string? artist = reader.ReadLine();
                     double length = Convert.ToDouble(reader.ReadLine());
-                    SongGenre genre = (SongGenre)Enum.Parse(typeof(SongGenre), reader.ReadLine());
+                    string? genreStr = reader.ReadLine();
+                    if (genreStr == null)
+                    {
+                        continue; // Skip this iteration if genreStr is null
+                    }
+                    SongGenre genre = (SongGenre)Enum.Parse(typeof(SongGenre), genreStr);
+                    if (artist == null)
+                    {
+                        continue; // Skip this iteration if artist is null
+                    }
                     songs.Add(new Song(title, artist, length, genre));
                 }
             }
