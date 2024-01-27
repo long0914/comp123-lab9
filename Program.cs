@@ -89,12 +89,12 @@
                     string? genreStr = reader.ReadLine();
                     if (genreStr == null)
                     {
-                        continue; // Skip this iteration if genreStr is null
+                        continue;
                     }
                     SongGenre genre = (SongGenre)Enum.Parse(typeof(SongGenre), genreStr);
                     if (artist == null)
                     {
-                        continue; // Skip this iteration if artist is null
+                        continue;
                     }
                     songs.Add(new Song(title, artist, length, genre));
                 }
