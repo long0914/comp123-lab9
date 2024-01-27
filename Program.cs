@@ -39,25 +39,28 @@
         }
     }
 
-
     [Flags]
     public enum SongGenre
     {
-        Unclassified = 0,
-        Pop = 0b1,
-        Rock = 0b10,
-        Blues = 0b100,
-        Country = 0b1_000,
-        Metal = 0b10_000,
-        Soul = 0b100_000
+        None = 0,
+        Blues = 1,
+        Country = 2,
+        Electronic = 4,
+        Folk = 8,
+        HipHop = 16,
+        Jazz = 32,
+        Pop = 64,
+        Rock = 128,
+        Soul = 256,
+        Metal = 512
     }
 
     public class Song
     {
-        public string Artist { get; }
-        public string Title { get; }
-        public double Length { get; }
-        public SongGenre Genre { get; }
+        public string Title { get; private set; }
+        public string Artist { get; private set; }
+        public double Length { get; private set; }
+        public SongGenre Genre { get; private set; }
 
         public Song(string title, string artist, double length, SongGenre genre)
         {
@@ -69,37 +72,14 @@
 
         public override string ToString()
         {
-            return $"{Title} by {Artist} ({Genre}) {Length}min";
+            return $"{Title} by {Artist}, {Length} mins, Genre: {Genre}";
         }
     }
+
 
     public static class Library
     {
         private static List<Song> songs = new List<Song>();
-
-        public static void LoadSongs(string fileName)
-        {
-            using (StreamReader? reader = new StreamReader(fileName))
-            {
-                string? title;
-                while ((title = reader.ReadLine()) != null)
-                {
-                    string? artist = reader.ReadLine();
-                    double length = Convert.ToDouble(reader.ReadLine());
-                    string? genreStr = reader.ReadLine();
-                    if (genreStr == null)
-                    {
-                        continue;
-                    }
-                    SongGenre genre = (SongGenre)Enum.Parse(typeof(SongGenre), genreStr);
-                    if (artist == null)
-                    {
-                        continue;
-                    }
-                    songs.Add(new Song(title, artist, length, genre));
-                }
-            }
-        }
 
         public static void DisplaySongs()
         {
@@ -111,33 +91,40 @@
 
         public static void DisplaySongs(double longerThan)
         {
-            foreach (var song in songs)
+            foreach (var song in songs.Where(s => s.Length > longerThan))
             {
-                if (song.Length > longerThan)
-                {
-                    Console.WriteLine(song);
-                }
+                Console.WriteLine(song);
             }
         }
 
         public static void DisplaySongs(SongGenre genre)
         {
-            foreach (var song in songs)
+            foreach (var song in songs.Where(s => s.Genre.HasFlag(genre)))
             {
-                if (song.Genre.HasFlag(genre))
-                {
-                    Console.WriteLine(song);
-                }
+                Console.WriteLine(song);
             }
         }
 
         public static void DisplaySongs(string artist)
         {
-            foreach (var song in songs)
+            foreach (var song in songs.Where(s => s.Artist == artist))
             {
-                if (song.Artist == artist)
+                Console.WriteLine(song);
+            }
+        }
+
+        public static void LoadSongs(string fileName)
+        {
+            using (var reader = new StreamReader(fileName))
+            {
+                string title;
+                while ((title = reader.ReadLine()) != null)
                 {
-                    Console.WriteLine(song);
+                    var artist = reader.ReadLine();
+                    var length = Convert.ToDouble(reader.ReadLine());
+                    var genre = (SongGenre)Enum.Parse(typeof(SongGenre), reader.ReadLine());
+
+                    songs.Add(new Song(title, artist, length, genre));
                 }
             }
         }
